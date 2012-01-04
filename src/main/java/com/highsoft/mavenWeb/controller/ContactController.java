@@ -1,5 +1,6 @@
 package com.highsoft.mavenWeb.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ContactController {
 	@RequestMapping("/index")
 	public String listContacts(Map<String,Object> map){
 		map.put("contact", new Contact());
+		List<Contact> list =  contactService.listContact();
 		map.put("contactList", contactService.listContact());
 		return "contact";
 	}
