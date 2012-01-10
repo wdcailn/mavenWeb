@@ -10,9 +10,13 @@
     	<servlet-name>spring</servlet-name>
     	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     </servlet>
+    <filter>
+	    <filter-name>exportFilter</filter-name>
+	    <filter-class>org.displaytag.filter.ResponseOverrideFilter</filter-class>
+  	</filter>
     <servlet-mapping>
     	<servlet-name>spring</servlet-name>
-    	<url-pattern>/</url-pattern>
+    	<url-pattern>*.do</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>list.html</welcome-file>
