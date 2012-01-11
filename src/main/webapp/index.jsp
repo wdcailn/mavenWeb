@@ -11,6 +11,7 @@
 	rel="Stylesheet" />
 <script type="text/javascript" src="./js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript" src="./js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="./js/jquery.validate.js"></script>
 <style>
 table{
 	margin:auto;
@@ -46,6 +47,10 @@ table span{
 	font:normal 16px/33px 'Microsoft YaHei';
 	font-size: 27px;
 }
+.error{
+	color: red;
+	font-size: 16px;
+}|
 </style>
 <script type="text/javascript">
 	function show() {
@@ -58,25 +63,39 @@ table span{
 
 	$(function() {
 		$("input:submit, input:button", ".demo").button();
-		$("input:submit", ".demo").click(function() {
-			$("input:submit").button({
-				disabled : true
-			});
-			$("input:submit").button({
-				label: "登录中……" 
-			});
-			return true;
-		});
+		$("#loginForm").validate({
+	        rules: {
+	          userName: "required",// simple rule, converted to {required:true}
+	          passWord:"required"
+	        },
+	        messages: {
+	        	userName: "请输入账号",
+	        	passWord:"请输入密码"
+	        },
+	        errorContainer: "div.error",
+	        errorLabelContainer: $("#loginForm div.error"),
+	        wrapper: "li",
+	        submitHandler:function() {
+				$("input:submit").button({
+					disabled : true
+				});
+				$("input:submit").button({
+					label: "登录中……" 
+				});
+				form.submit;
+			}
+	      }
+		);
 	});
-
 </script>
 <body>
 	
 	<div class="con_div">
 		<div id="effect" class="ui-widget-content ui-corner-all">
 		<h3 class="ui-widget-header ui-corner-all nav_bar" >MaveWeb System By Alex Wang</h3>
-		<form action="login.do" method="post">
+		<form action="login.do" method="post" id="loginForm">
 			<table>
+				<tr><td></td><td align="center"><div class="error"></div></td></tr>
 				<tr>
 					<td align="right"><span>账号：</span></td>
 					<td align="center"><input type="text" id="userName" name="userName"/></td>
